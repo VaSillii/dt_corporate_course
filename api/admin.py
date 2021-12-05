@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import TextClassification
+
+
+@admin.register(TextClassification)
+class TextClassificationAdmin(admin.ModelAdmin):
+    model = TextClassification
+    # fields = '__all__'
