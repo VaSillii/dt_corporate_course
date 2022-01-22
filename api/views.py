@@ -5,6 +5,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializers import TextClassificationSerializer
+from ..dt_corporate_course import settings
+from ..dt_corporate_course.nlp_microservice.text_classification import predict
 
 
 class ClassificationTextAPIView(APIView):
@@ -23,9 +25,5 @@ class ClassificationTextAPIView(APIView):
         if 'data' not in request.data:
             return Response({'error': 'Invalid data or key'}, status=status.HTTP_400_BAD_REQUEST)
 
-        text_ser = ClassificationTextAPIView.get_serializer_text_classification(request.data['data'])
-
-        if text_ser.is_valid(raise_exception=True):
-            text_ser.save()
-
-        return Response({'data_p': []})
+        data_predict = predict(settings.MODEL_NLP, request.data['data'])
+        return Response({'initial_data': request.data['data'], 'predict': data_predict})

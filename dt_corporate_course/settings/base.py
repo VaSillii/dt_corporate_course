@@ -13,6 +13,8 @@ import os
 import environ
 
 from pathlib import Path
+from ..nlp_microservice.text_classification import model
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -175,3 +177,7 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 #         }
 #     }
 # }
+
+
+# Upload model NLP
+MODEL_NLP = model
